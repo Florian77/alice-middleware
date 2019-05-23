@@ -26,6 +26,7 @@ const {processCommands} = require('./lib/process-commands');
 
 const {handleEvent} = require('./lib/handle-event');
 const {processEvents} = require('./lib/process-events');
+const {process} = require('./lib/process');
 
 const {
     loadAggregateByKeyString,
@@ -72,6 +73,7 @@ module.exports = {
     handleEvent,
     processCommands,
     handleCommand,
+    process,
 
     loadAggregateByKeyString,
     loadAggregateByKey,
@@ -95,6 +97,3 @@ module.exports = {
     getCollectionEvent,
     getCollectionCommand,
 };
-
-
-
