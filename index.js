@@ -22,8 +22,10 @@ const {
 const {storeAggregates} = require('./lib/store-aggregates');
 
 const {handleCommand} = require('./lib/handle-command');
+const {processCommands} = require('./lib/process-commands');
 
 const {handleEvent} = require('./lib/handle-event');
+const {processEvents} = require('./lib/process-events');
 
 const {
     loadAggregateByKeyString,
@@ -66,7 +68,9 @@ module.exports = {
     // verifyEvent,
     // loadDependencies,
     storeAggregates,
+    processEvents,
     handleEvent,
+    processCommands,
     handleCommand,
 
     loadAggregateByKeyString,
@@ -94,47 +98,3 @@ module.exports = {
 
 
 
-
-// ----------------------------------------------------------
-//  verify Event is processable
-// ----------------------------------------------------------
-/*
-const verifyEvent = async (eventData, typeConfig) => {
-    if (!eventData || !eventData.id || !eventData.id.type) throw Error(`${moduleName}.verifyEvent(): eventData.id.type missing`);
-    if (!eventData || !eventData.id || !eventData.id.key) throw Error(`${moduleName}.verifyEvent(): eventData.id.key missing`);
-    if (!typeConfig || !typeConfig.subscribe) throw Error(`${moduleName}.verifyEvent(): typeConfig.subscribe missing`);
-
-    const {type, key} = eventData.id;
-
-    // check type subscriptions
-    const subscribeTypes = R.map(R.prop('type'), typeConfig.subscribe);
-    if (debug && debug.verifyEvent) ftDev.logJsonString(type, `${moduleName}.verifyEvent()::type:`);
-    if (debug && debug.verifyEvent) ftDev.logJsonString(subscribeTypes, `${moduleName}.verifyEvent()::subscribeTypes:`);
-    if (!R.includes(type, subscribeTypes)) {
-        throw Error(`${moduleName}.verifyEvent(): Event [${type}] not subscribed [${subscribeTypes.join(',')}]`);
-    }
-
-    if (typeConfig.verifyEvent && !typeConfig.verifyEvent(eventData, typeConfig)) {
-        throw Error(`${moduleName}.verifyEvent(): typeConfig.verifyEvent(eventData, typeConfig) faild`);
-    }
-
-    return true;
-};
-*/
-
-
-// ----------------------------------------------------------
-//  Load dependent Data
-// ----------------------------------------------------------
-/*const loadDependencies = async (dependencies) => {
-    if (debug && debug.loadDependencies) ftDev.logJsonString(dependencies, `${moduleName}.loadDependencies()::dependencies:`);
-
-    let dependentData = [];
-    // DEMO
-    if (dependencies) {
-        dependentData = [dependencies];
-    }
-    // TODO: Load all Items or throw Error
-
-    return dependentData;
-};*/
