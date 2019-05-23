@@ -6,8 +6,8 @@
   "author": "Florian Tölle",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Florian77/alice-middleware.git"
+    "type": "git",
+    "url": "https://github.com/Florian77/alice-middleware.git"
   },
   "dependencies": {
     "ftws-node-dev-tools": "github:Florian77/node-dev-tools",
