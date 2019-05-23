@@ -4,6 +4,10 @@
   "scripts": {},
   "author": "Florian Tölle",
   "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Florian77/alice-middleware.git"
+  },
   "dependencies": {
     "ftws-node-dev-tools": "github:Florian77/node-dev-tools",
     "query-string": "^6.4.2",
