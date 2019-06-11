@@ -52,6 +52,7 @@ const {
     isEventTypeDelete,
 } = require('./lib/event-type');
 
+const DataCluster = require('./lib/data-cluster');
 
 // ----------------------------------------------------------
 //  Module Export
@@ -96,4 +97,6 @@ module.exports = {
     getCollectionAggregate,
     getCollectionEvent,
     getCollectionCommand,
+
+    DataCluster,
 };
