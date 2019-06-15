@@ -16,6 +16,7 @@ const keyHelper = require('./lib/key-helper');
 const {
     getTypeConfig,
     setTypeConfig,
+    setTypeExeFnPath,
     makeTypeConfigString
 } = require('./lib/global-type-config');
 
@@ -59,6 +60,7 @@ const DataCluster = require('./lib/data-cluster');
 // ----------------------------------------------------------
 module.exports = {
     setTypeConfig,
+    setTypeExeFnPath,
     getTypeConfig,
     makeTypeConfigString,
 
