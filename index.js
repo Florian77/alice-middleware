@@ -6,6 +6,7 @@
 const {
     connect,
     disconnect,
+    getCollection,
     getCollectionAggregate,
     getCollectionEvent,
     getCollectionCommand
@@ -96,6 +97,7 @@ module.exports = {
     isResultTypeError,
     returnEmptyResult,
 
+    getCollection,
     getCollectionAggregate,
     getCollectionEvent,
     getCollectionCommand,
