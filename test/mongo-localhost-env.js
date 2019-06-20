@@ -6,7 +6,7 @@ process.env.ALICE_MIDDLEWARE_SERVICE = `${pack.name}-${pack.version}`;
 
 process.env.ALICE_MIDDLEWARE_DB_DRIVER = "mongodb";
 process.env.ALICE_MIDDLEWARE_MONGODB_URL = "mongodb://localhost";
-process.env.ALICE_MIDDLEWARE_MONGODB_DB = `${pack.name}-${pack.version}`;
+process.env.ALICE_MIDDLEWARE_MONGODB_DB = String(`${pack.name}-${pack.version}`).replace(/\./g,'-');
 
 // Optional:
 process.env.ALICE_MIDDLEWARE_MONGODB_COLL_AGGREGATE = "aggregate";
