@@ -31,8 +31,11 @@ const {processEvents} = require('./lib/process-events');
 const {process} = require('./lib/process');
 
 const {
+    queryAggregateList,
+    queryAggregate,
     loadAggregateByKeyString,
-    loadAggregateByKey
+    loadAggregateByKey,
+    findAggregate,
 } = require('./lib/load-aggregate');
 
 const {
@@ -70,8 +73,6 @@ module.exports = {
     connect,
     disconnect,
 
-    // verifyEvent,
-    // loadDependencies,
     storeAggregates,
     processEvents,
     handleEvent,
@@ -79,8 +80,11 @@ module.exports = {
     handleCommand,
     process,
 
+    queryAggregateList,
+    queryAggregate,
     loadAggregateByKeyString,
     loadAggregateByKey,
+    findAggregate,
 
     returnEventTypeCreate,
     isEventTypeCreate,
