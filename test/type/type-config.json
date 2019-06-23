@@ -1,0 +1,12 @@
+[
+  {
+    "context": "test",
+    "aggregate": "test",
+    "idFormat": [
+      "id",
+      "key"
+    ],
+    "subscribe": false,
+    "invokeCommand": false
+  }
+]
