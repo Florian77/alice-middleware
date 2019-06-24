@@ -31,11 +31,11 @@ const test__makeAggregateIds = (exeFn, invokeKey) => {
     return result;
 };
 
-const test__createAggregates = async (exeFn, aggregates, showInputAggregates = false) => {
+const test__createAggregates = async (exeFn, aggregates, invokeKey = '', showInputAggregates = false) => {
     ftDev.log(resultSplitString);
     if(showInputAggregates)
         ftDev.logJsonString(aggregates, `exeFn.createAggregates()::aggregates:`);
-    const result = await exeFn.createAggregates(aggregates);
+    const result = await exeFn.createAggregates(aggregates, invokeKeyStringToObject(invokeKey), invokeKey);
     ftDev.logJsonString(result, `exeFn.createAggregates()::result:`);
     return result;
 };
