@@ -7,10 +7,15 @@ const resultSplitString = "\n---------------------------------------------------
 // TODO: Add debug output options
 
 const loadAggregate = (data, additionalData = {}) => {
-    data = mergeRight(data, {
-        "exists": true
-    }, additionalData);
-
+    data = mergeRight(
+        data,
+        mergeRight(
+            {
+                "exists": true
+            },
+            additionalData
+        )
+    );
     return addObjectKeyToAggregate(data);
 };
 
