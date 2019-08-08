@@ -3,7 +3,7 @@ require('../mongo-localhost-test-env');
 const {clearDatabase} = require('../../type-test-helpers');
 const alice = require('../../index');
 alice.setTypeExeFnPath(__dirname, '../type/', true);
-const {storeAggregates, queryAggregateList, key} = alice;
+const {storeAggregates, processEvents, key} = alice;
 const {objectKey, objectType, objectSearch} = key;
 const ftDev = require('ftws-node-dev-tools');
 const R = require('ramda');
@@ -35,51 +35,51 @@ const aggregate_1 = {
 let doClearDatabase = true;
 // doClearDatabase = false;
 
-describe('queryAggregateList', function () {
+describe('processEvents', function () {
 
     this.timeout(10 * 1000);
 
-    before(async () => {
+    beforeEach(async () => {
+        ftDev.log('----------------------------------------');
         if (doClearDatabase) {
-            if (await clearDatabase(alice)) {
-                // done();
-                // return true;
-            } else {
+            if (!await clearDatabase(alice)) {
                 throw Error('clearDatabase() faild ');
             }
         } else {
             await alice.connect();
             ftDev.log('doClearDatabase: OFF');
-
         }
-        ftDev.log('');
-
-        await storeAggregates('test/test/id-1', [aggregate_1]);
-        // ftDev.logJsonString(result, 'storeAggregates().result:')
     });
 
     after(async () => {
         await alice.disconnect();
     });
 
-    it('queryAggregateList(key)', async function () {
-        ftDev.log('');
-        ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
-        const result = await queryAggregateList([
-            aggregateKey_1
-        ]);
-        ftDev.logJsonString(result, 'queryAggregateList([aggregateKey_1]).result:');
-        // TODO: add expect()
+    it('processEvents(1) no unhandled events', async function () {
+        // ftDev.log('');
+        // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
+        const result = await processEvents(1);
+        ftDev.logJsonString(result, 'processEvents(1).result:');
+        expect(result).to.be.false;
     });
 
-    it('queryAggregateList(search)', async function () {
-        ftDev.log('');
-        ftDev.logJsonString(searchKey_1, 'searchKey_1');
-        const result = await queryAggregateList([
-            searchKey_1
-        ]);
-        ftDev.logJsonString(result, 'queryAggregateList([searchKey_1]).result:');
-        // TODO: add expect()
+    it('processEvents(1)', async function () {
+        // ftDev.log('');
+        await storeAggregates('test/test/id-1', [aggregate_1]);
+        // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
+        const result = await processEvents(1);
+        ftDev.logJsonString(result, 'processEvents(1).result:');
+        expect(result).to.be.true;
     });
+
+    it('processEvents(3)', async function () {
+        // ftDev.log('');
+        await storeAggregates('test/test/id-1', [aggregate_1]);
+        // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
+        const result = await processEvents(3);
+        ftDev.logJsonString(result, 'processEvents(1).result:');
+        expect(result).to.be.true;
+    });
+
 
 });

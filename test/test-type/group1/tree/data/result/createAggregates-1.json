@@ -1,0 +1,27 @@
+[
+  {
+    "key": {
+      "id": {
+        "id": "1"
+      }
+    },
+    "payload": {
+      "data": "bla..."
+    },
+    "meta": {
+      "ok": true,
+      "msg": []
+    },
+    "relations": [
+      {
+        "type": {
+          "context": "group1",
+          "aggregate": "bar"
+        },
+        "id": {
+          "id": "1"
+        }
+      }
+    ]
+  }
+]

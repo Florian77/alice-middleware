@@ -1,0 +1,23 @@
+{
+  "_id" : "group1/bar/id=1",
+  "context" : "group1",
+  "aggregate" : "bar",
+  "aggregateId" : "id=1",
+  "index" : {
+    "id" : 1
+  },
+  "meta" : {
+    "ok" : true,
+    "msg" : [
+
+    ]
+  },
+  "payload" : {
+    "id" : 1
+  },
+  "relations" : [
+
+  ],
+  "hasRelations" : false,
+  "invokeKey" : "group1/bar/1"
+}

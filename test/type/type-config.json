@@ -7,6 +7,43 @@
       "key"
     ],
     "subscribe": false,
-    "invokeCommand": false
+    "createInvokeCommand": false
+  },
+  {
+    "context": "group1",
+    "aggregate": "foo",
+    "idFormat": [
+      "id"
+    ],
+    "subscribe": false,
+    "createInvokeCommand": false
+  },
+  {
+    "context": "group1",
+    "aggregate": "bar",
+    "idFormat": [
+      "id"
+    ],
+    "subscribe": [
+      {
+        "context": "group1",
+        "aggregate": "foo"
+      }
+    ],
+    "createInvokeCommand": true
+  },
+  {
+    "context": "group1",
+    "aggregate": "tree",
+    "idFormat": [
+      "id"
+    ],
+    "subscribe": [
+      {
+        "context": "group1",
+        "aggregate": "bar"
+      }
+    ],
+    "createInvokeCommand": true
   }
 ]

@@ -1,0 +1,9 @@
+{
+  "type": {
+    "context": "group1",
+    "aggregate": "bar"
+  },
+  "id": {
+    "id": "1"
+  }
+}
