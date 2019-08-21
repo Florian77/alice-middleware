@@ -6,6 +6,7 @@
 const {
     connect,
     disconnect,
+    isConnected,
     getCollection,
     getCollectionAggregate,
     getCollectionEvent,
@@ -72,6 +73,7 @@ module.exports = {
 
     connect,
     disconnect,
+    isConnected,
 
     storeAggregates,
     processEvents,
