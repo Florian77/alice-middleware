@@ -10,7 +10,8 @@ const {
     getCollection,
     getCollectionAggregate,
     getCollectionEvent,
-    getCollectionCommand
+    getCollectionCommand,
+    checkIndexes,
 } = require('./lib/database');
 
 const keyHelper = require('./lib/key-helper');
@@ -107,6 +108,7 @@ module.exports = {
     getCollectionAggregate,
     getCollectionEvent,
     getCollectionCommand,
+    checkIndexes,
 
     DataCluster,
 };
