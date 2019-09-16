@@ -24,17 +24,32 @@ const metaOkTrue = {
     msg: []
 };
 
+let doClearDatabase = true;
+// doClearDatabase = false;
 
-(async () => {
-    try {
-        // Connect to Database
-        // await alice.connect(); --> clearDatabase does connection
+describe('test-case-1', function () {
 
-        // ------------------------------
-        //  Clear Database
-        // ------------------------------
-        await clearDatabase(alice);
+    this.timeout(10 * 1000);
 
+    before(async () => {
+        ftDev.log('----------------------------------------');
+        if (doClearDatabase) {
+            if (!await clearDatabase(alice)) {
+                throw Error('clearDatabase() faild ');
+            }
+        } else {
+            await alice.connect();
+            ftDev.log('doClearDatabase: OFF');
+        }
+
+    });
+
+    after(async () => {
+        await alice.disconnect();
+    });
+
+
+    it('run', async function () {
 
         // ------------------------------
         //  IMPORT: foo 1...5
@@ -75,12 +90,7 @@ const metaOkTrue = {
         // ------------------------------
         // await alice.process();
 
+    });
 
-    } catch (e) {
-        ftDev.error(e);
-    }
 
-    await alice.disconnect();
-
-})();
-
+});
