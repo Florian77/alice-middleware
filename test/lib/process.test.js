@@ -3,7 +3,7 @@ require('../mongo-localhost-test-env');
 const {clearDatabase} = require('../../type-test-helpers');
 const alice = require('../../index');
 alice.setTypeExeFnPath(__dirname, '../type/', true);
-const {storeAggregates, processEvents, key} = alice;
+const {storeAggregates, process, key} = alice;
 const {objectKey, objectType, objectSearch} = key;
 const ftDev = require('ftws-node-dev-tools');
 const R = require('ramda');
@@ -15,8 +15,9 @@ const chai = require('chai')
 // https://www.chaijs.com/api/bdd/
 // , should = chai.should();
 
-const this_CONTEXT = 'test', this_AGGREGATE = 'test';
+const this_CONTEXT = 'group1', this_AGGREGATE = 'foo';
 const this_OBJECT_TYPE = objectType(this_CONTEXT, this_AGGREGATE);
+
 
 const id_1 = {id: 1, key: 1};
 const id_2 = {id: 2, key: 2};
@@ -34,7 +35,7 @@ const aggregate_3 = {key: aggregateKey_3, payload: {data: 'aggregate_3'}};
 let doClearDatabase = true;
 // doClearDatabase = false;
 
-describe('processEvents', function () {
+describe('process', function () {
 
     this.timeout(10 * 1000);
 
@@ -54,62 +55,73 @@ describe('processEvents', function () {
         await alice.disconnect();
     });
 
-    it('processEvents(1) no unhandled events', async function () {
+    it('process(1) no unhandled commands', async function () {
         // ftDev.log('');
         // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
-        const result = await processEvents(1);
-        ftDev.logJsonString(result, 'processEvents(1).result:');
+        const result = await process({
+            maxProcessCycles: 1,
+            maxProcessEvents: 1,
+            maxProcessCommands: 1,
+        });
+        ftDev.logJsonString(result, 'process(1).result:');
         expect(result).to.be.deep.equals({
-            "moreToProcess": false,
-            "processedCounter": 0,
-            "withError": false
+            "events": 0,
+            "commands": 0
         });
     });
 
-    it('processEvents(1)', async function () {
-        // ftDev.log('');
-        await storeAggregates('test/test/id-1', [aggregate_1]);
-        // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
-        const result = await processEvents(1);
-        ftDev.logJsonString(result, 'processEvents(1).result:');
-        // expect(result).to.be.true;
-        expect(result).to.be.deep.equals({
-            "moreToProcess": true,
-            "processedCounter": 1,
-            "withError": false
-        });
-    });
-
-    it('processEvents(3)', async function () {
+    it('aggregate_1->process(1)', async function () {
         // ftDev.log('');
         await storeAggregates('test/test/id-1', [aggregate_1]);
         // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
-        const result = await processEvents(3);
-        ftDev.logJsonString(result, 'processEvents(3).result:');
+        const result = await process({
+            maxProcessCycles: 1,
+            maxProcessEvents: 1,
+            maxProcessCommands: 1,
+        });
+        ftDev.logJsonString(result, '.result:');
         // expect(result).to.be.true;
         expect(result).to.be.deep.equals({
-            "moreToProcess": true,
-            "processedCounter": 1,
-            "withError": false
+            "events": 1,
+            "commands": 1
         });
     });
 
-    it('processEvents(2)', async function () {
+    it('aggregate[1-3]->process(2)', async function () {
         // ftDev.log('');
         await storeAggregates('test/test/id-1', [aggregate_1]);
         await storeAggregates('test/test/id-2', [aggregate_2]);
         await storeAggregates('test/test/id-3', [aggregate_3]);
         // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
-        const result = await processEvents(2);
-        ftDev.logJsonString(result, 'processEvents(2).result:');
+        const result = await process({
+            maxProcessCycles: 2,
+            maxProcessEvents: 1,
+            maxProcessCommands: 1,
+        });
+        ftDev.logJsonString(result, '.result:');
         // expect(result).to.be.true;
         expect(result).to.be.deep.equals({
-            "moreToProcess": true,
-            "processedCounter": 2,
-            "withError": false
+            "events": 2,
+            "commands": 2
         });
     });
 
-    // TODO: Add Error handling inside "handleEvent()"
+    it('aggregate_1->process(3)', async function () {
+        // ftDev.log('');
+        await storeAggregates('test/test/id-1', [aggregate_1]);
+        // ftDev.logJsonString(aggregateKey_1, 'aggregateKey_1');
+        const result = await process({
+            maxProcessCycles: 5,
+            maxProcessEvents: 1,
+            maxProcessCommands: 1,
+        });
+        ftDev.logJsonString(result, '.result:');
+        // expect(result).to.be.true;
+        expect(result).to.be.deep.equals({
+            "events": 3,
+            "commands": 2
+        });
+    });
+
 
 });
