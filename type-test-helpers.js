@@ -51,7 +51,9 @@ const clearDatabase = async alice => {
 // return false;
     try {
         // Connect to Database
-        await alice.connect();
+        if(!await alice.connect()) {
+            return false;
+        }
 
         const res1 = await alice.getCollectionAggregate().deleteMany({});
         ftDev.mongo.logDeleteMany(res1, 'alice.getCollectionAggregate().deleteMany({})', true);
