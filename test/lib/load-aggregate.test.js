@@ -40,19 +40,15 @@ describe('queryAggregateList', function () {
     this.timeout(10 * 1000);
 
     before(async () => {
+        ftDev.log('----------------------------------------');
         if (doClearDatabase) {
-            if (await clearDatabase(alice)) {
-                // done();
-                // return true;
-            } else {
+            if (!await clearDatabase(alice)) {
                 throw Error('clearDatabase() faild ');
             }
         } else {
             await alice.connect();
             ftDev.log('doClearDatabase: OFF');
-
         }
-        ftDev.log('');
 
         await storeAggregates('test/test/id-1', [aggregate_1]);
         // ftDev.logJsonString(result, 'storeAggregates().result:')
