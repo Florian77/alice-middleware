@@ -2,7 +2,9 @@
   "name": "ftws-alice-middleware",
   "description": "none",
   "version": "0.3.2",
-  "scripts": {},
+  "scripts": {
+    "test": "npx mocha --ui bdd ./test --recursive"
+  },
   "author": "Florian Tölle",
   "license": "ISC",
   "repository": {
