@@ -20,7 +20,8 @@ const {
     getTypeConfig,
     setTypeConfig,
     setTypeExeFnPath,
-    makeTypeConfigString
+    makeTypeConfigString,
+    getFullTypeConfig,
 } = require('./lib/global-type-config');
 
 const {storeAggregates} = require('./lib/store-aggregates');
@@ -69,6 +70,7 @@ module.exports = {
     setTypeExeFnPath,
     getTypeConfig,
     makeTypeConfigString,
+    getFullTypeConfig,
 
     key: keyHelper,
 
